@@ -3,27 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <style>
+		.agent-type-heading {
+			font-size: 1.2em;
+			font-weight: bold;
+		}
+		#search-box-wrapper {
+		    width: 320px;
+		    margin: 10px auto;
+		}
+		.agent-list-wrapper {
+		    border: 1px solid #aae;
+		    box-shadow: 1px 1px 5px #224;
+		    border-radius: 5px;
+		    position: absolute;
+		    z-index: 1000;
+		}
+
+		#search_text {
+		    border-radius: 5px;
+				padding: 0 1em;
+				width: 80%;
+		}
+		.search-button {
+		    background-color: #aac;
+		    border-radius: 10px;
+		    cursor: pointer;
+				padding: 0 5px;
+		}
+		.search-button:focus {
+		    outline: 0;
+		}
+		.hide {
+		    display:none;
+		}
+
   </style>
 </head>
 <body>
 
+
+<div id="search-box-wrapper" >
+  <input type="text" />
+  <button class="search-button" >&#128269;</button>
+
+  <div id="drop_list_wrapper" class="agent-list-wrapper hide">
+    <select size="6" >
+    </select>
+  </div>
+</div>
+				
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="modules/SearchBar.js"></script>
 
 <script>
-  var pager = 0;
-  var data = [],
-      page_no = 1,
-      total_rows = 0;
+  var data = [];
   $(document).ready( function( $){
-    pager = new Pager( "max_rows_droplist", "table_body", "paging_wrapper", data.length, getPageData);
+    const search = new SearchBar( getAgentData, "search-box-wrapper", "drop_list_wrapper", listItemSelected, searchButtonClicked);
   });
-  
-  function getPageData( display_rows, offset, total_rows){
-    console.log( "getpagedata display[%d] offset[%d] total[%d]", display_rows, offset, total_rows);
+  function searchButtonClicked( searchText){
+    console.log( "search for agent:", searchText);
+    // window.location.replace( "http://greatermonctonrealtors.com/agent-table?searchText="+searchText);
+  }
+  function listItemSelected( agent_name){
+    console.log( "selected agent:", agent_name);
+		// window.location.replace( "http://greatermonctonrealtors.com/profile?agent_muid="+agent_name);
+  }
+  function getAgentData( searchText){
     let pd = [];
-    for( var i=offset; i < (offset+display_rows) && i<total_rows; i++){
-      pd.push( { id: data[i].id, name: data[i].first_name, email: data[i].email});
+    for( var i=0; i < data.length; i++){
+      if( data[i].last_name.toLowerCase().indexOf( searchText.toLowerCase()) === 0){
+        pd.push( { id: data[i].id, text: data[i].first_name+" "+data[i].last_name});
+      }
     }
     return pd;
   }
