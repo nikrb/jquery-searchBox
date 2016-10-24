@@ -32,16 +32,13 @@ class SearchBar {
     }
   }
   searchTextChange(e){
-    console.log( "text change search text:", e.target.value);
     if( e.target.value.length > 0){
       this.current_search_text = e.target.value;
       const list_items = this.getData( this.current_search_text);
-      console.log( "list items:", list_items);
       this.updateListDropdown( list_items);
     }
   }
   itemSelected( e){
-    console.log( "redirect to agent detail:", e.target.value);
 		this.dropListDiv.hide( 100);
 		this.callbackItemSelected( e.target.value);
   }
