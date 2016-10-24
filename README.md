@@ -36,3 +36,47 @@ Template
   </div>
 </div>
 ```
+
+Styling
+-------
+
+```
+<style>
+.agent-type-heading {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+#search-box-wrapper {
+    width: 320px;
+    margin: 10px auto;
+}
+.agent-list-wrapper {
+    border: 1px solid #aae;
+    box-shadow: 1px 1px 5px #224;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1000;
+}
+
+#search_text {
+    border-radius: 5px;
+	padding: 0 1em;
+	width: 80%;
+}
+.search-button {
+    background-color: #aac;
+    border-radius: 10px;
+    cursor: pointer;
+	padding: 0 5px;
+}
+.search-button:focus {
+    outline: 0;
+}
+.hide {
+    display:none;
+}
+
+</style>
+
+```
+
