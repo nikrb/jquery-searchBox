@@ -15,7 +15,7 @@ const search = new SearchBar( getAgentData, "search-box-wrapper", "drop_list_wra
 where:
 * getAgentData( searchText, callback) function to get droplist data
     * searchText text to search with
-    * callback( array_of_objects) pass data back, object { id: some_id, text: droplist text }
+    * callback( array_of_objects) pass data back, object { id: some_id, text: "droplist text" }
 * search-box-wrapper string id of box wrapper.
     * input and button element are found from this
 * drop_list_wrapper used to show/hide the droplist
