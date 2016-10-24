@@ -23,19 +23,25 @@ class SearchBar {
   }
 
   updateListDropdown( data){
-		this.dropListDiv.show( 100);
     this.selectList.empty(); // find( 'option').remove();
-    for( var i=0; i<data.length; i++){
-      var item = data[i];
-      this.selectList.append( "<option value='"+item.id+"' >"+
-                      item.text + "</option>");
+    if( data.length){
+  		this.dropListDiv.show( 100);
+      for( var i=0; i<data.length; i++){
+        var item = data[i];
+        this.selectList.append( "<option value='"+item.id+"' >"+
+                        item.text + "</option>");
+      }
+    } else {
+      this.dropListDiv.hide(100);
     }
   }
   searchTextChange(e){
+    const that = this;
     if( e.target.value.length > 0){
       this.current_search_text = e.target.value;
-      const list_items = this.getData( this.current_search_text);
-      this.updateListDropdown( list_items);
+      this.getData( this.current_search_text, function( list_items){
+        that.updateListDropdown( list_items);
+      });
     }
   }
   itemSelected( e){
